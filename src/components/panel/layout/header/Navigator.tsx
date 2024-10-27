@@ -28,15 +28,15 @@ const Navigator = () => {
   };
 
   return (
-    <nav>
-      <ul className="flex gap-2">
+    <nav className="">
+      <ul className="flex flex-col md:flex-row gap-2">
         {routes.map((e) => (
           <li key={e.name}>
             <Link href={e.href}>
               <Button
                 variant="ghost"
                 className={cn(
-                  "py-[10px] h-auto text-muted-foreground",
+                  "py-[10px] h-auto text-muted-foreground w-full",
                   isActive(e.href) &&
                     "font-semibold bg-accent text-accent-foreground"
                 )}
