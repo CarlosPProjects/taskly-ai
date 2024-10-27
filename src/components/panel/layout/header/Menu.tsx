@@ -10,6 +10,7 @@ import {
 import Navigator from "./Navigator";
 import { Button } from "@/components/ui/button";
 import { MenuIcon } from "lucide-react";
+import Logo from "./Logo";
 
 const Menu = () => {
   return (
@@ -25,7 +26,9 @@ const Menu = () => {
         </SheetTrigger>
         <SheetContent>
           <SheetHeader>
-            <SheetTitle>Are you absolutely sure?</SheetTitle>
+            <SheetTitle>
+              <Logo />
+            </SheetTitle>
             <SheetDescription>
               This action cannot be undone. This will permanently delete your
               account and remove your data from our servers.
