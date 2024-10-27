@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React from "react";
 
 const routes = [
   {
@@ -33,16 +32,18 @@ const Navigator = () => {
       <ul className="flex gap-2">
         {routes.map((e) => (
           <li key={e.name}>
-            <Button
-              variant="ghost"
-              className={cn(
-                "py-[10px] h-auto text-muted-foreground",
-                isActive(e.href) &&
-                  "font-semibold bg-accent text-accent-foreground"
-              )}
-            >
-              <Link href={e.href}>{e.name}</Link>
-            </Button>
+            <Link href={e.href}>
+              <Button
+                variant="ghost"
+                className={cn(
+                  "py-[10px] h-auto text-muted-foreground",
+                  isActive(e.href) &&
+                    "font-semibold bg-accent text-accent-foreground"
+                )}
+              >
+                {e.name}
+              </Button>
+            </Link>
           </li>
         ))}
       </ul>
