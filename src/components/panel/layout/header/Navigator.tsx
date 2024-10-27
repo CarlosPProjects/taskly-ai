@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn, isActivePathname } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -23,10 +23,6 @@ const routes = [
 const Navigator = () => {
   const pathname = usePathname();
 
-  const isActive = (path: string) => {
-    return pathname === path;
-  };
-
   return (
     <nav className="">
       <ul className="flex flex-col md:flex-row gap-2">
@@ -37,7 +33,7 @@ const Navigator = () => {
                 variant="ghost"
                 className={cn(
                   "py-[10px] h-auto text-muted-foreground w-full",
-                  isActive(e.href) &&
+                  isActivePathname(e.href, pathname) &&
                     "font-semibold bg-accent text-accent-foreground"
                 )}
               >
