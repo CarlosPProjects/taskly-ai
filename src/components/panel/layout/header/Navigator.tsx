@@ -36,7 +36,7 @@ const Navigator = () => {
             <Button
               variant="ghost"
               className={cn(
-                "py-[10px] h-auto",
+                "py-[10px] h-auto text-muted-foreground",
                 isActive(e.href) &&
                   "font-semibold bg-accent text-accent-foreground"
               )}
