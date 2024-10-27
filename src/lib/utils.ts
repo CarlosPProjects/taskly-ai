@@ -16,5 +16,5 @@ export function getInitials(name: string | null) {
 
 
 export const isActivePathname = (path: string, pathname: string) => {
-  return pathname === path;
+  return pathname.includes(path);
 };
