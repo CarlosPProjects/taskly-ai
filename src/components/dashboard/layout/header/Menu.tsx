@@ -7,8 +7,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import { MenuIcon } from "lucide-react";
+import { AlignLeft} from "lucide-react";
 import Logo from "./Logo";
 import Sidebar from "../../Sidebar";
 
@@ -17,19 +16,13 @@ const Menu = () => {
     <>
       <Sheet>
         <SheetTrigger asChild>
-          <Button size="icon" className="md:hidden" variant="secondary">
-            <MenuIcon className="size-5" />
-          </Button>
+          <AlignLeft className="size-6 cursor-pointer text-muted-foreground" />
         </SheetTrigger>
-        <SheetContent>
+        <SheetContent className="border-border" side="left">
           <SheetHeader>
-            <SheetTitle>
+            <SheetTitle className="py-12 flex justify-center">
               <Logo />
             </SheetTitle>
-            <SheetDescription>
-              This action cannot be undone. This will permanently delete your
-              account and remove your data from our servers.
-            </SheetDescription>
           </SheetHeader>
           <Sidebar />
         </SheetContent>

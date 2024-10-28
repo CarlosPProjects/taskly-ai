@@ -1,6 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { cn } from "@/lib/utils";
 import { SignOutButton } from "@clerk/nextjs";
 import { Bot, LayoutDashboard, ListTodo, LogOut, User } from "lucide-react";
 import Link from "next/link";
@@ -30,7 +28,7 @@ const routes = [
 
 const Sidebar = () => {
   return (
-    <nav className="flex flex-col justify-between gap-2 w-fit xl:w-full">
+    <nav className="flex flex-col justify-between gap-2 w-full lg:w-fit xl:w-full pr-8 lg:border-r border-border">
       <ul className="flex flex-col gap-2">
         {routes.map((e) => (
           <li key={e.name}>
@@ -40,7 +38,7 @@ const Sidebar = () => {
                 className="w-full lg:w-fit xl:w-full justify-start font-normal text-muted-foreground h-auto text-base py-3"
               >
                 {e.icon}
-                <span className="hidden xl:block">{e.name}</span>
+                <span className="block lg:hidden xl:block">{e.name}</span>
               </Button>
             </Link>
           </li>
@@ -52,7 +50,7 @@ const Sidebar = () => {
           className="w-full justify-start font-normal text-muted-foreground h-auto text-base py-3"
         >
           <LogOut />
-          <span className="hidden xl:block">Log out</span>
+          <span className="block lg:hidden xl:block">Log out</span>
         </Button>
       </SignOutButton>
     </nav>
