@@ -2,7 +2,6 @@ import Container from "@/components/Container";
 import React from "react";
 import Logo from "./Logo";
 import User from "./User";
-import Menu from "./Menu";
 
 const Header = () => {
   return (
@@ -11,7 +10,6 @@ const Header = () => {
         <div className="hidden md:block">
           <Logo />
         </div>
-        <Menu />
         <User />
       </Container>
     </header>

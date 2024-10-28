@@ -47,14 +47,14 @@ const Sidebar = () => {
                   <Button
                     variant="ghost"
                     className={cn(
-                      "w-full justify-start",
+                      "w-full justify-start text-sm",
                       pathname === item.href
                         ? "bg-accent text-accent-foreground"
                         : "text-muted-foreground"
                     )}
                   >
                     {item.icon}
-                    <span className="ml-2">{item.name}</span>
+                    <span className="hidden xl:block">{item.name}</span>
                   </Button>
                 </Link>
               </li>
