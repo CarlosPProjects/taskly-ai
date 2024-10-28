@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { MenuIcon } from "lucide-react";
 import Logo from "./Logo";
+import Sidebar from "../../Sidebar";
 
 const Menu = () => {
   return (
@@ -30,6 +31,7 @@ const Menu = () => {
               account and remove your data from our servers.
             </SheetDescription>
           </SheetHeader>
+          <Sidebar />
         </SheetContent>
       </Sheet>
     </>

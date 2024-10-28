@@ -30,17 +30,17 @@ const routes = [
 
 const Sidebar = () => {
   return (
-    <nav className="flex flex-col justify-between gap-2 w-full max-w-48">
+    <nav className="flex flex-col justify-between gap-2 w-fit xl:w-full">
       <ul className="flex flex-col gap-2">
         {routes.map((e) => (
           <li key={e.name}>
             <Link href={e.href}>
               <Button
                 variant="ghost"
-                className="w-full justify-start font-normal text-muted-foreground h-auto text-base py-3"
+                className="w-full lg:w-fit xl:w-full justify-start font-normal text-muted-foreground h-auto text-base py-3"
               >
                 {e.icon}
-                <span>{e.name}</span>
+                <span className="hidden xl:block">{e.name}</span>
               </Button>
             </Link>
           </li>
@@ -51,8 +51,8 @@ const Sidebar = () => {
           variant="ghost"
           className="w-full justify-start font-normal text-muted-foreground h-auto text-base py-3"
         >
-          <LogOut/>
-          <span>Log out</span>
+          <LogOut />
+          <span className="hidden xl:block">Log out</span>
         </Button>
       </SignOutButton>
     </nav>
