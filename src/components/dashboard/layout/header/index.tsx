@@ -2,6 +2,9 @@ import Container from "@/components/Container";
 import React from "react";
 import Logo from "./Logo";
 import User from "./User";
+import { Bell } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { ModeToggle } from "@/components/mode-toggle";
 
 const Header = () => {
   return (
@@ -10,7 +13,13 @@ const Header = () => {
         <div className="hidden md:block">
           <Logo />
         </div>
-        <User />
+        <div className="flex items-center gap-2">
+          <ModeToggle />
+          <Button variant="ghost" size="icon" className="border">
+            <Bell className="text-muted-foreground" />
+          </Button>
+          <User />
+        </div>
       </Container>
     </header>
   );

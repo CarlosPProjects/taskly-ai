@@ -54,7 +54,7 @@ const Sidebar = () => {
                     )}
                   >
                     {item.icon}
-                    <span className="hidden xl:block">{item.name}</span>
+                    <span>{item.name}</span>
                   </Button>
                 </Link>
               </li>
