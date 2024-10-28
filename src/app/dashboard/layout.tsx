@@ -1,6 +1,6 @@
 import Container from "@/components/Container";
-import Sidebar from "@/components/panel/dashboard/Sidebar";
-import Header from "@/components/panel/layout/header";
+import Sidebar from "@/components/dashboard/Sidebar";
+import Header from "@/components/dashboard/layout/header";
 import React, { FC } from "react";
 
 interface Props {
