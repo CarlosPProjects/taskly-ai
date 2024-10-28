@@ -37,7 +37,7 @@ const Sidebar = () => {
             <Link href={e.href}>
               <Button
                 variant="ghost"
-                className="w-full justify-start font-normal text-muted-foreground h-auto"
+                className="w-full justify-start font-normal text-muted-foreground h-auto text-base py-3"
               >
                 {e.icon}
                 <span>{e.name}</span>
@@ -49,7 +49,7 @@ const Sidebar = () => {
       <SignOutButton>
         <Button
           variant="ghost"
-          className="w-full justify-start font-normal text-muted-foreground h-auto"
+          className="w-full justify-start font-normal text-muted-foreground h-auto text-base py-3"
         >
           <LogOut/>
           <span>Log out</span>

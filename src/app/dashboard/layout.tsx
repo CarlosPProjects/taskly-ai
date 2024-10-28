@@ -11,9 +11,10 @@ const DashboardLayout: FC<Props> = ({ children }) => {
   return (
     <section className="flex flex-col min-h-screen">
       <Header />
-      <Container className="flex flex-1 py-8 md:py-16 lg:gap-10 xl:gap-28">
+      <Container className="flex flex-1 h-full py-8 md:py-16">
         <Sidebar />
-        <div className="flex flex-1 justify-center w-full mx-auto">{children}</div>
+        <div className="mx-12 self-stretch w-px bg-border" />
+        <div className="flex justify-center flex-1">{children}</div>
       </Container>
     </section>
   );
