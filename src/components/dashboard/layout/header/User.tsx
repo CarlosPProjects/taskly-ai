@@ -11,7 +11,7 @@ const User = async () => {
     <Skeleton className="size-8 rounded-full" />
   ) : (
     <Link href="/dashboard/user-profile">
-      <Avatar className="size-9 rounded-md">
+      <Avatar className="size-8 rounded-md">
         <AvatarImage src={user.imageUrl} alt="user avatar" />
         <AvatarFallback>{getInitials(user.fullName)}</AvatarFallback>
       </Avatar>

@@ -15,7 +15,7 @@ const Header = () => {
         </div>
         <div className="flex items-center gap-2">
           <ModeToggle />
-          <Button variant="ghost" size="icon" className="border">
+          <Button variant="ghost" size="icon" className="border border-border">
             <Bell className="text-muted-foreground" />
           </Button>
           <User />
