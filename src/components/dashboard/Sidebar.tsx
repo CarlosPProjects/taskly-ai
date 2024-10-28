@@ -1,68 +1,60 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
-import { Bot, ListTodo, User } from "lucide-react";
+import { SignOutButton } from "@clerk/nextjs";
+import { Bot, LayoutDashboard, ListTodo, LogOut, User } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import React from "react";
 
-const routes = {
-  personal: [
-    {
-      name: "Profile",
-      href: "/dashboard/user-profile",
-      icon: <User />,
-    },
-  ],
-  workspace: [
-    {
-      name: "Chatbot",
-      href: "/dashboard/workspace/chatbot",
-      icon: <Bot />,
-    },
-    {
-      name: "Tasks",
-      href: "/dashboard/workspace/tasks",
-      icon: <ListTodo />,
-    }
-  ],
-};
+const routes = [
+  {
+    name: "Dashboard",
+    href: "/dashboard",
+    icon: <LayoutDashboard className="size-6" />,
+  },
+  {
+    name: "Chatbot",
+    href: "/dashboard/chatbot",
+    icon: <Bot />,
+  },
+  {
+    name: "Tasks",
+    href: "/dashboard/tasks",
+    icon: <ListTodo />,
+  },
+  {
+    name: "Settings",
+    href: "/dashboard/user-profile",
+    icon: <User />,
+  },
+];
 
 const Sidebar = () => {
-  const pathname = usePathname();
-
   return (
-    <nav className="w-full max-w-48">
-      {Object.entries(routes).map(([sectionName, sectionContent]) => (
-        <div key={sectionName}>
-          <h3 className="px-3 py-2 font-medium uppercase text-xs text-[#7C8087]">
-            {sectionName}
-          </h3>
-          <ul>
-            {sectionContent.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href}>
-                  <Button
-                    variant="ghost"
-                    className={cn(
-                      "w-full justify-start text-sm",
-                      pathname === item.href
-                        ? "bg-accent text-accent-foreground"
-                        : "text-muted-foreground"
-                    )}
-                  >
-                    {item.icon}
-                    <span>{item.name}</span>
-                  </Button>
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <Separator className="my-2" />
-        </div>
-      ))}
+    <nav className="flex flex-col justify-between gap-2 w-full max-w-48">
+      <ul className="flex flex-col gap-2">
+        {routes.map((e) => (
+          <li key={e.name}>
+            <Link href={e.href}>
+              <Button
+                variant="ghost"
+                className="w-full justify-start font-normal text-muted-foreground h-auto"
+              >
+                {e.icon}
+                <span>{e.name}</span>
+              </Button>
+            </Link>
+          </li>
+        ))}
+      </ul>
+      <SignOutButton>
+        <Button
+          variant="ghost"
+          className="w-full justify-start font-normal text-muted-foreground h-auto"
+        >
+          <LogOut/>
+          <span>Log out</span>
+        </Button>
+      </SignOutButton>
     </nav>
   );
 };
