@@ -1,19 +1,31 @@
-import React from "react";
-import { generatePrompt } from "../actions/chat";
+'use client'
 
-const Dashboard = async() => {
+import { useChat } from 'ai/react';
 
-  const response = await generatePrompt();
+const Dashboard = () => {
 
-  console.log(response.content);
+  const { messages, input, handleSubmit, handleInputChange, isLoading } =
+    useChat();
 
-  if(response.content) {
-    return (
-      <div>
-        <p>{response.content}</p>
-      </div>
-    )
-  }
+  return (
+    <div>
+      {messages.map(message => (
+        <div key={message.id}>
+          <div>{message.role}</div>
+          <div>{message.content}</div>
+        </div>
+      ))}
+
+      <form onSubmit={handleSubmit}>
+        <input
+          value={input}
+          placeholder="Send a message..."
+          onChange={handleInputChange}
+          disabled={isLoading}
+        />
+      </form>
+    </div>
+  );
 };
 
 export default Dashboard;
