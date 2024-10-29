@@ -3,15 +3,19 @@
 import OpenAI from "openai";
 const openai = new OpenAI();
 export const generatePrompt = async () => {
-  const completion = await openai.chat.completions.create({
+  const response = await openai.chat.completions.create({
     model: "gpt-4o",
     messages: [
-      { role: "system", content: "You are a helpful assistant." },
       {
-        role: "user",
-        content: "Write a haiku about recursion in programming.",
-      },
-    ],
+        "role": "user",
+        "content": [
+          {
+            "type": "text",
+            "text": "Write a haiku about programming."
+          }
+        ]
+      }
+    ]
   });
-  return completion.choices[0].message;
+  return response.choices[0].message;
 };

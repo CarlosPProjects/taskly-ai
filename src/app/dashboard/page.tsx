@@ -5,13 +5,15 @@ const Dashboard = async() => {
 
   const response = await generatePrompt();
 
-  console.log(response);
+  console.log(response.content);
 
-  return (
-    <main>
-      <p>Hello World</p>
-    </main>
-  );
+  if(response.content) {
+    return (
+      <div>
+        <p>{response.content}</p>
+      </div>
+    )
+  }
 };
 
 export default Dashboard;
