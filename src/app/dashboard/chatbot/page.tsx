@@ -1,10 +1,9 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { cn, getInitials } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { useUser } from "@clerk/shared/react/index";
 import { useChat } from "ai/react";
 import {
@@ -80,6 +79,19 @@ const Chatbot = () => {
     handleSubmit(e);
   };
 
+  const handleCardClick = (description: string) => {
+    handleInputChange({
+      target: { value: description },
+    } as React.ChangeEvent<HTMLInputElement>);
+    setTimeout(() => {
+      if (ref.current) {
+        ref.current.dispatchEvent(
+          new Event("submit", { cancelable: true, bubbles: true })
+        );
+      }
+    }, 0);
+  };
+
   return (
     <div className="flex w-full bg-background">
       <div className="flex-1 px-4 py-8 md:px-8">
@@ -111,7 +123,10 @@ const Chatbot = () => {
               <div className="mt-8 grid gap-2 sm:grid-cols-2 md:grid-cols-4">
                 {suggestCards.map((e) => (
                   <React.Fragment key={e.id}>
-                    <Card className="p-4 hover:bg-muted/50">
+                    <Card
+                      className="p-4 hover:bg-muted/50 cursor-pointer"
+                      onClick={() => handleCardClick(e.description)}
+                    >
                       <div className="flex flex-col h-full items-start justify-between gap-4 ">
                         <div className="space-y-1">
                           <p className="text-sm">{e.description}</p>
