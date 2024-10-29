@@ -1,8 +1,10 @@
 "use client";
 
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { cn, getInitials } from "@/lib/utils";
 import { useUser } from "@clerk/shared/react/index";
 import { useChat } from "ai/react";
 import {
@@ -13,6 +15,7 @@ import {
   Clock,
   List,
   CheckCircle,
+  Bot,
 } from "lucide-react";
 
 import React from "react";
@@ -47,7 +50,7 @@ const suggestCards: SuggestCard[] = [
 ];
 
 const Chatbot = () => {
-  const user = useUser();
+  const { user } = useUser();
   const { messages, input, handleInputChange, handleSubmit } = useChat();
   const [chatStarted, setChatStarted] = React.useState(false);
   const [showContent, setShowContent] = React.useState(true);
@@ -68,14 +71,14 @@ const Chatbot = () => {
   return (
     <div className="flex w-full bg-background">
       <div className="flex-1 px-4 py-8 md:px-8">
-        <div className="flex flex-col justify-between h-full mx-auto max-w-3xl">
+        <div className="flex flex-col justify-between max-h-[700px] h-full mx-auto max-w-3xl">
           {showContent ? (
             <div>
               <div className="space-y-2 text-start">
                 <h1 className="text-4xl font-semibold">
                   Hi there,{" "}
                   <span className="bg-gradient-to-r from-foreground to-red-500 bg-clip-text text-transparent">
-                    {user.user?.firstName}
+                    {user?.firstName}
                   </span>
                 </h1>
                 <h2 className="text-2xl">
@@ -110,22 +113,30 @@ const Chatbot = () => {
               </div>
             </div>
           ) : (
-            <div className="flex flex-1 flex-col">
-              {messages.map((m) => (
-                <div key={m.id} className="whitespace-pre-wrap">
-                  {m.role === "user" ? "User: " : "AI: "}
-                  {m.content}
+            <div className="mt-8 flex flex-col gap-4 overflow-y-scroll">
+              {messages.map((e) => (
+                <div
+                  key={e.id}
+                  className={cn(
+                    "flex items-center gap-3",
+                    e.role === "user" && "flex-row-reverse"
+                  )}
+                >
+                  {e.role === "assistant" && (
+                    <div className="rounded-full border border-border p-2">
+                      <Bot className="size-5" />
+                    </div>
+                  )}
+                  <div className="rounded-md bg-muted py-3 px-6 max-w-xl">
+                    <p>{e.content}</p>
+                  </div>
                 </div>
               ))}
             </div>
           )}
 
           {/* Input Area */}
-          <form
-            className="mt-8"
-            onSubmit={handleSubmitWithHide}
-            ref={ref}
-          >
+          <form className="mt-8" onSubmit={handleSubmitWithHide} ref={ref}>
             <div className="relative">
               <Input
                 className="pr-24 rounded-xl py-6"
@@ -137,7 +148,7 @@ const Chatbot = () => {
               <div className="absolute inset-y-0 right-0 flex items-center gap-2 pr-3">
                 <Button
                   size="icon"
-                  className="h-8 w-8 rounded-lg bg-primary text-primary-foreground"
+                  className="h-8 w-8 rounded-md bg-primary text-primary-foreground"
                 >
                   <Send className="h-4 w-4" />
                   <span className="sr-only">Send message</span>

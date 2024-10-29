@@ -4,7 +4,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function getInitials(name: string | null) {
+export function getInitials(name: string | null | undefined) {
   if (!name) {
     return "NN";
   }
