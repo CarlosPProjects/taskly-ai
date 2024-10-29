@@ -1,11 +1,19 @@
 import React from "react";
+import { generatePrompt } from "../actions/chat";
 
-const Dashboard = () => {
-  return (
-    <main>
-      <p>Hello World</p>
-    </main>
-  );
+const Dashboard = async() => {
+
+  const response = await generatePrompt();
+
+  console.log(response.content);
+
+  if(response.content) {
+    return (
+      <div>
+        <p>{response.content}</p>
+      </div>
+    )
+  }
 };
 
 export default Dashboard;
