@@ -55,6 +55,18 @@ const Chatbot = () => {
   const [chatStarted, setChatStarted] = React.useState(false);
   const [showContent, setShowContent] = React.useState(true);
 
+  const messagesEndRef = React.useRef(null);
+
+  const scrollToBottom = () => {
+    (messagesEndRef.current as unknown as HTMLDivElement)?.scrollIntoView({
+      behavior: "smooth",
+    });
+  };
+
+  React.useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
   const ref = React.useRef<HTMLFormElement>(null);
 
   React.useEffect(() => {
@@ -113,7 +125,7 @@ const Chatbot = () => {
               </div>
             </div>
           ) : (
-            <div className="mt-8 flex flex-col gap-4 overflow-y-scroll">
+            <div className="mt-8 flex flex-col gap-4 overflow-y-scroll __hideScrollBar">
               {messages.map((e) => (
                 <div
                   key={e.id}
@@ -132,6 +144,7 @@ const Chatbot = () => {
                   </div>
                 </div>
               ))}
+              <div ref={messagesEndRef} />
             </div>
           )}
 
