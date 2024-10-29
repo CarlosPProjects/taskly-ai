@@ -5,7 +5,15 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { useUser } from "@clerk/shared/react/index";
 import { useChat } from "ai/react";
-import { PaperclipIcon, Send, User, LucideIcon } from "lucide-react";
+import {
+  PaperclipIcon,
+  Send,
+  LucideIcon,
+  TrendingUp,
+  Clock,
+  List,
+  CheckCircle,
+} from "lucide-react";
 
 import React from "react";
 
@@ -18,74 +26,106 @@ type SuggestCard = {
 const suggestCards: SuggestCard[] = [
   {
     id: 1,
-    icon: User,
-    description: "Write a to-do list for a personal project or task",
+    icon: TrendingUp,
+    description: "Suggest ways to optimize tasks for better efficiency",
   },
   {
     id: 2,
-    icon: User,
-    description: "Generate an email to reply to a job offer",
+    icon: Clock,
+    description: "Provide tips on how to manage project time effectively",
   },
   {
     id: 3,
-    icon: User,
-    description: "Summarise this article or text for me in one paragraph",
+    icon: List,
+    description: "Summarize best practices for prioritizing tasks",
   },
   {
     id: 4,
-    icon: User,
-    description: "How does AI work in a technical capacity",
+    icon: CheckCircle,
+    description: "How can I improve task flow and reduce time waste?",
   },
 ];
 
 const Chatbot = () => {
   const user = useUser();
   const { messages, input, handleInputChange, handleSubmit } = useChat();
+  const [chatStarted, setChatStarted] = React.useState(false);
+  const [showContent, setShowContent] = React.useState(true);
+
+  const ref = React.useRef<HTMLFormElement>(null);
+
+  React.useEffect(() => {
+    if (ref.current?.submit) {
+      setChatStarted(true);
+    }
+  }, [chatStarted]);
+
+  const handleSubmitWithHide = (e: React.FormEvent<HTMLFormElement>) => {
+    setShowContent(false);
+    handleSubmit(e);
+  };
 
   return (
-    <div className="flex bg-background">
+    <div className="flex w-full bg-background">
       <div className="flex-1 px-4 py-8 md:px-8">
-        <div className="mx-auto max-w-3xl">
-          <div className="space-y-2 text-start">
-            <h1 className="text-4xl font-semibold">
-              Hi there,{" "}
-              <span className="bg-gradient-to-r from-foreground to-red-500 bg-clip-text text-transparent">
-                {user.user?.firstName}
-              </span>
-            </h1>
-            <h2 className="text-2xl">
-              What{" "}
-              <span className="bg-gradient-to-r from-foreground to-red-500 bg-clip-text text-transparent">
-                would you like to{" "}
-              </span>
-              <span className="bg-gradient-to-r from-foreground to-red-500 bg-clip-text text-transparent">
-                know?
-              </span>
-            </h2>
-            <p className="text-sm text-muted-foreground">
-              Use one of the most common prompts below or use your own to begin
-            </p>
-          </div>
+        <div className="flex flex-col justify-between h-full mx-auto max-w-3xl">
+          {showContent ? (
+            <div>
+              <div className="space-y-2 text-start">
+                <h1 className="text-4xl font-semibold">
+                  Hi there,{" "}
+                  <span className="bg-gradient-to-r from-foreground to-red-500 bg-clip-text text-transparent">
+                    {user.user?.firstName}
+                  </span>
+                </h1>
+                <h2 className="text-2xl">
+                  What{" "}
+                  <span className="bg-gradient-to-r from-foreground to-red-500 bg-clip-text text-transparent">
+                    would you like to{" "}
+                  </span>
+                  <span className="bg-gradient-to-r from-foreground to-red-500 bg-clip-text text-transparent">
+                    know?
+                  </span>
+                </h2>
+                <p className="text-sm text-muted-foreground">
+                  Use one of the most common prompts below or use your own to
+                  begin
+                </p>
+              </div>
+              {/* Suggestion Cards */}
+              <div className="mt-8 grid gap-2 sm:grid-cols-2 md:grid-cols-4">
+                {suggestCards.map((e) => (
+                  <React.Fragment key={e.id}>
+                    <Card className="p-4 hover:bg-muted/50">
+                      <div className="flex flex-col h-full items-start justify-between gap-4 ">
+                        <div className="space-y-1">
+                          <p className="text-sm">{e.description}</p>
+                        </div>
 
-          {/* Suggestion Cards */}
-          <div className="mt-8 grid gap-2 sm:grid-cols-4">
-            {suggestCards.map((e) => (
-              <React.Fragment key={e.id}>
-                <Card className="p-4 hover:bg-muted/50">
-                  <div className="flex flex-col h-full items-start justify-between gap-4 ">
-                    <div className="space-y-1">
-                      <p className="text-sm">{e.description}</p>
-                    </div>
-
-                    <e.icon className="size-4" strokeWidth={1.5} />
-                  </div>
-                </Card>
-              </React.Fragment>
-            ))}
-          </div>
+                        <e.icon className="size-4" strokeWidth={1.5} />
+                      </div>
+                    </Card>
+                  </React.Fragment>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div className="flex flex-1 flex-col">
+              {messages.map((m) => (
+                <div key={m.id} className="whitespace-pre-wrap">
+                  {m.role === "user" ? "User: " : "AI: "}
+                  {m.content}
+                </div>
+              ))}
+            </div>
+          )}
 
           {/* Input Area */}
-          <form className="mt-8" onSubmit={handleSubmit}>
+          <form
+            className="mt-8"
+            onSubmit={handleSubmitWithHide}
+            ref={ref}
+          >
             <div className="relative">
               <Input
                 className="pr-24 rounded-xl py-6"
