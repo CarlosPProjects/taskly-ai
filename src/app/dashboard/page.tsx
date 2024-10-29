@@ -4,24 +4,22 @@ import { useChat } from 'ai/react';
 
 const Dashboard = () => {
 
-  const { messages, input, handleSubmit, handleInputChange, isLoading } =
-    useChat();
-
+  const { messages, input, handleInputChange, handleSubmit } = useChat();
   return (
-    <div>
-      {messages.map(message => (
-        <div key={message.id}>
-          <div>{message.role}</div>
-          <div>{message.content}</div>
+    <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch">
+      {messages.map(m => (
+        <div key={m.id} className="whitespace-pre-wrap">
+          {m.role === 'user' ? 'User: ' : 'AI: '}
+          {m.content}
         </div>
       ))}
 
       <form onSubmit={handleSubmit}>
         <input
+          className="fixed bottom-0 w-full max-w-md p-2 mb-8 border border-gray-300 rounded shadow-xl"
           value={input}
-          placeholder="Send a message..."
+          placeholder="Say something..."
           onChange={handleInputChange}
-          disabled={isLoading}
         />
       </form>
     </div>
