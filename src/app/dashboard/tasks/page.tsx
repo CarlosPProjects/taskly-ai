@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, Edit2, Trash2, CheckCircle, Circle } from "lucide-react";
+import { Plus, Edit2, Trash2 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 
 interface Task {
   id: number;
@@ -56,7 +57,7 @@ export default function Tasks() {
     <div className="flex w-full bg-background">
       <div className="flex-1 px-4 py-8 md:px-8">
         <div className="flex flex-col max-h-[700px] h-full mx-auto max-w-3xl">
-          <h1 className="text-3xl font-semibold text-gray-900 mb-6">Tasks</h1>
+          <h1 className="text-3xl font-semibold mb-6">Tasks</h1>
 
           <Button
             onClick={addTask}
@@ -68,12 +69,12 @@ export default function Tasks() {
 
           <div className="flex flex-col gap-3">
             {tasks.map((task) => (
-              <div key={task.id} className="bg-white rounded-xl shadow-md p-6">
+              <Card key={task.id} className="rounded-xl p-6 shadow-lg">
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-lg font-medium text-gray-800">
+                  <h2 className="text-lg font-medium">
                     {task.name}
                   </h2>
-                  <span className="text-sm text-gray-500">{task.dueDate}</span>
+                  <span className="text-sm text-muted-foreground">{task.dueDate}</span>
                 </div>
 
                 <div className="flex items-center justify-between">
@@ -99,7 +100,7 @@ export default function Tasks() {
                     onCheckedChange={() => toggleComplete(task.id)}
                   />
                 </div>
-              </div>
+              </Card>
             ))}
           </div>
         </div>

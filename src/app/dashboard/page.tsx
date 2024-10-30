@@ -48,47 +48,39 @@ export default function IosDashboard() {
     <div className="flex w-full bg-background">
       <div className="flex-1 px-4 py-8 md:px-8">
         <div className="flex flex-col max-h-[700px] h-full mx-auto max-w-3xl">
-          <h1 className="text-3xl font-semibold text-gray-900 mb-6">
-            Dashboard
-          </h1>
+          <h1 className="text-3xl font-semibold mb-6">Dashboard</h1>
 
-          <Card className="mb-6 bg-white/80 backdrop-blur-lg shadow-lg rounded-2xl overflow-hidden">
+          <Card className="mb-6 shadow-lg rounded-2xl overflow-hidden">
             <div className="p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">
-                Task Progress
-              </h2>
+              <h2 className="text-xl font-semibold  mb-4">Task Progress</h2>
               <Progress
                 value={completionPercentage}
                 className="h-2 bg-gray-200"
               />
-              <p className="text-sm text-gray-600 mt-2">
+              <p className="text-sm mt-2">
                 {completedTasks} of {tasks.length} tasks completed
               </p>
             </div>
           </Card>
 
-          <Card className="bg-white/80 backdrop-blur-lg shadow-lg rounded-2xl overflow-y-scroll __hideScrollBar">
+          <Card className="shadow-lg rounded-2xl overflow-y-scroll __hideScrollBar">
             <div className="p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">
-                Task Summary
-              </h2>
+              <h2 className="text-xl font-semibold mb-4">Task Summary</h2>
               <ul className="space-y-4">
                 {tasks.map((task) => (
                   <li
                     key={task.id}
-                    className="flex items-center justify-between py-3 border-b border-gray-200 last:border-b-0"
+                    className="flex items-center justify-between py-3 border-b  last:border-b-0"
                   >
                     <div className="flex flex-col">
                       <span
                         className={`text-base ${
-                          task.completed
-                            ? "text-gray-400 line-through"
-                            : "text-gray-900"
+                          task.completed && "text-muted-foreground line-through"
                         }`}
                       >
                         {task.name}
                       </span>
-                      <span className="text-sm text-gray-500">
+                      <span className="text-sm">
                         Due: {task.dueDate}
                       </span>
                     </div>
