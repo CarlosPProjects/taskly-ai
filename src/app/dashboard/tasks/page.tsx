@@ -64,7 +64,7 @@ export default function Tasks() {
             <CardTitle>Add New Task</CardTitle>
           </CardHeader>
           <CardContent>
-            <form className="flex" onSubmit={() => console.log()}>
+            <form onSubmitCapture={addTask} className="flex" onSubmit={() => console.log()}>
               <Input
                 type="text"
                 name="task"

@@ -95,7 +95,7 @@ const Chatbot = () => {
 
   return (
     <div className="flex w-full bg-background">
-      <div className="flex-1 px-4 py-8 md:px-8">
+      <div className="flex-1">
         <div className="flex flex-col justify-between max-h-[700px] h-full mx-auto max-w-3xl">
           {showContent ? (
             <div>

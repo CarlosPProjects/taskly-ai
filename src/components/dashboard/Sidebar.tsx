@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { FC } from "react";
 
 type Route = {
   name: string;
@@ -43,7 +44,11 @@ const routes: Route[] = [
   },
 ];
 
-const Sidebar = () => {
+interface Props {
+  closeSheet?: () => void;
+}
+
+const Sidebar: FC<Props> = ({ closeSheet }) => {
   const pathname = usePathname();
 
   return (
@@ -51,7 +56,7 @@ const Sidebar = () => {
       <ul className="flex flex-col gap-2">
         {routes.map((e) => (
           <li key={e.name}>
-            <Link href={e.href}>
+            <Link href={e.href} onClick={closeSheet}>
               <Button
                 variant="ghost"
                 className="w-full lg:w-fit xl:w-full justify-start font-medium text-muted-foreground h-auto text-base py-3"

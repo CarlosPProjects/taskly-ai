@@ -46,7 +46,7 @@ export default function IosDashboard() {
 
   return (
     <div className="flex w-full bg-background">
-      <div className="flex-1 px-4 py-8 md:px-8">
+      <div className="flex-1">
         <div className="flex flex-col max-h-[700px] h-full mx-auto max-w-3xl">
           <h1 className="text-3xl font-semibold mb-6">Dashboard</h1>
 
@@ -80,9 +80,7 @@ export default function IosDashboard() {
                       >
                         {task.name}
                       </span>
-                      <span className="text-sm">
-                        Due: {task.dueDate}
-                      </span>
+                      <span className="text-sm">Due: {task.dueDate}</span>
                     </div>
                     <Switch
                       checked={task.completed}

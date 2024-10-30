@@ -1,8 +1,9 @@
-import React from "react";
+'use client'
+
+import React, { useState } from "react";
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -12,9 +13,16 @@ import Logo from "./Logo";
 import Sidebar from "../../Sidebar";
 
 const Menu = () => {
+
+  const [isOpen, setIsOpen] = useState(false); 
+
+  const closeSheet = () => {
+    setIsOpen(false);
+  }
+
   return (
     <>
-      <Sheet>
+      <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger asChild>
           <AlignLeft className="size-6 cursor-pointer text-muted-foreground" />
         </SheetTrigger>
@@ -24,7 +32,7 @@ const Menu = () => {
               <Logo />
             </SheetTitle>
           </SheetHeader>
-          <Sidebar />
+          <Sidebar closeSheet={closeSheet} />
         </SheetContent>
       </Sheet>
     </>
