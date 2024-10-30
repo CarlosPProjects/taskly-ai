@@ -83,9 +83,9 @@ const Sidebar: FC<Props> = ({ closeSheet }) => {
       <SignOutButton>
         <Button
           variant="ghost"
-          className="w-full justify-start font-normal text-muted-foreground h-auto text-base py-3"
+          className="w-full justify-start font-medium text-muted-foreground h-auto text-base py-3"
         >
-          <LogOut />
+          <LogOut className="!size-5" />
           <span className="block lg:hidden xl:block">Log out</span>
         </Button>
       </SignOutButton>
