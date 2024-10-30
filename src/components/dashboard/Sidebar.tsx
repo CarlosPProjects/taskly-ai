@@ -1,32 +1,51 @@
-import { Button } from "@/components/ui/button";
-import { SignOutButton } from "@clerk/nextjs";
-import { Bot, LayoutDashboard, ListTodo, LogOut, User } from "lucide-react";
-import Link from "next/link";
+"use client";
 
-const routes = [
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { SignOutButton } from "@clerk/nextjs";
+import {
+  Bot,
+  LayoutDashboard,
+  ListTodo,
+  LogOut,
+  LucideIcon,
+  User,
+} from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+type Route = {
+  name: string;
+  href: string;
+  icon: LucideIcon;
+};
+
+const routes: Route[] = [
   {
     name: "Dashboard",
     href: "/dashboard",
-    icon: <LayoutDashboard className="size-6" />,
+    icon: LayoutDashboard,
   },
   {
     name: "Chatbot",
     href: "/dashboard/chatbot",
-    icon: <Bot />,
+    icon: Bot,
   },
   {
     name: "Tasks",
     href: "/dashboard/tasks",
-    icon: <ListTodo />,
+    icon: ListTodo,
   },
   {
     name: "Settings",
     href: "/dashboard/user-profile",
-    icon: <User />,
+    icon: User,
   },
 ];
 
 const Sidebar = () => {
+  const pathname = usePathname();
+
   return (
     <nav className="flex flex-col justify-between gap-2 w-full lg:w-fit xl:w-full pr-8 lg:border-r border-border">
       <ul className="flex flex-col gap-2">
@@ -35,10 +54,22 @@ const Sidebar = () => {
             <Link href={e.href}>
               <Button
                 variant="ghost"
-                className="w-full lg:w-fit xl:w-full justify-start font-normal text-muted-foreground h-auto text-base py-3"
+                className="w-full lg:w-fit xl:w-full justify-start font-medium text-muted-foreground h-auto text-base py-3"
               >
-                {e.icon}
-                <span className="block lg:hidden xl:block">{e.name}</span>
+                <e.icon
+                  className={cn(
+                    "!size-5",
+                    pathname === e.href && "text-primary"
+                  )}
+                />
+                <span
+                  className={cn(
+                    "block lg:hidden xl:block",
+                    pathname === e.href && "text-primary"
+                  )}
+                >
+                  {e.name}
+                </span>
               </Button>
             </Link>
           </li>
