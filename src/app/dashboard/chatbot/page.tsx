@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 
 import React from "react";
+import Markdown from "react-markdown";
 
 type SuggestCard = {
   id: number;
@@ -155,7 +156,7 @@ const Chatbot = () => {
                     </div>
                   )}
                   <div className="rounded-md bg-muted py-3 px-6 max-w-xl">
-                    <p>{e.content}</p>
+                    <Markdown>{e.content}</Markdown>
                   </div>
                 </div>
               ))}
