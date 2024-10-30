@@ -95,7 +95,7 @@ const Chatbot = () => {
 
   return (
     <div className="flex items-center w-full bg-background">
-      <div className={cn("flex flex-col justify-between w-full  mx-auto max-w-3xl", showContent ? "h-fit" : "h-full")}>
+      <div className={cn("flex flex-col justify-end w-full  mx-auto max-w-3xl", showContent ? "h-fit" : "h-full")}>
         {showContent ? (
           <div>
             <div className="space-y-2 text-start">
@@ -140,21 +140,21 @@ const Chatbot = () => {
             </div>
           </div>
         ) : (
-          <div className="mt-8 flex flex-col gap-4 max-h-[500px] overflow-y-scroll __hideScrollBar">
+          <div className="mt-8 flex flex-col gap-4 overflow-y-scroll max-h-[600px] __hideScrollBar">
             {messages.map((e) => (
               <div
                 key={e.id}
                 className={cn(
-                  "flex items-center gap-3",
+                  "flex items-start gap-3",
                   e.role === "user" && "flex-row-reverse"
                 )}
               >
                 {e.role === "assistant" && (
-                  <div className="rounded-full border border-border p-2">
+                  <div className="rounded-full border border-border mt-1 p-2 hidden sm:block">
                     <Bot className="size-5" />
                   </div>
                 )}
-                <div className="rounded-md bg-muted py-3 px-6 max-w-xl">
+                <div className="rounded-md bg-muted py-3 px-6 max-w-[90%]">
                   <Markdown>{e.content}</Markdown>
                 </div>
               </div>
