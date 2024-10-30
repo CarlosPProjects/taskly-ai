@@ -4,7 +4,8 @@ import { useState } from "react";
 import { Plus, Edit2, Trash2 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 
 interface Task {
   id: number;
@@ -55,26 +56,39 @@ export default function Tasks() {
 
   return (
     <div className="flex w-full bg-background">
-      <div className="flex-1 px-4 py-8 md:px-8">
+      <div className="flex-1">
         <div className="flex flex-col max-h-[700px] h-full mx-auto max-w-3xl">
           <h1 className="text-3xl font-semibold mb-6">Tasks</h1>
 
-          <Button
-            onClick={addTask}
-            className="h-auto flex items-center justify-center w-full mb-8 py-3 text-white rounded-lg shadow-md"
-          >
-            <Plus className="w-5 h-5 mr-2" />
-            New Task
-          </Button>
+          <Card className="col-span-full md:col-span-2 lg:col-span-3 mb-3 shadow-lg">
+            <CardHeader>
+              <CardTitle>Add New Task</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <form className="flex" onSubmit={() => console.log()}>
+                <Input
+                  type="text"
+                  name="task"
+                  placeholder="Enter task name"
+                  className="flex-grow mr-2"
+                  required
+                />
+                <Button type="submit">
+                  <Plus className="w-4 h-4 mr-2" />
+                  Add Task
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
 
-          <div className="flex flex-col gap-3">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 overflow-y-scroll __hideScrollBar">
             {tasks.map((task) => (
-              <Card key={task.id} className="rounded-xl p-6 shadow-lg">
+              <Card key={task.id} className="rounded-xl p-6 shadow-md">
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-lg font-medium">
-                    {task.name}
-                  </h2>
-                  <span className="text-sm text-muted-foreground">{task.dueDate}</span>
+                  <h2 className="text-md font-medium">{task.name}</h2>
+                  <span className="text-xs text-muted-foreground">
+                    {task.dueDate}
+                  </span>
                 </div>
 
                 <div className="flex items-center justify-between">
