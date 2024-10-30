@@ -15,7 +15,7 @@ const DashboardLayout: FC<Props> = ({ children }) => {
         <div className="hidden lg:flex w-full max-w-60">
           <Sidebar />
         </div>
-        <div className="flex justify-center flex-1">{children}</div>
+        <div className="flex justify-center flex-1 max-h-full">{children}</div>
       </Container>
     </section>
   );

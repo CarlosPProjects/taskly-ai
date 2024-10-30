@@ -55,68 +55,66 @@ export default function Tasks() {
   };
 
   return (
-    <div className="flex w-full bg-background">
-      <div className="flex-1">
-        <div className="flex flex-col max-h-[700px] h-full mx-auto max-w-3xl">
-          <h1 className="text-3xl font-semibold mb-6">Tasks</h1>
+    <div className="flex bg-background w-full">
+      <div className="flex flex-col mx-auto w-full max-w-3xl">
+        <h1 className="text-3xl font-semibold mb-6">Tasks</h1>
 
-          <Card className="col-span-full md:col-span-2 lg:col-span-3 mb-3 shadow-lg">
-            <CardHeader>
-              <CardTitle>Add New Task</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <form className="flex" onSubmit={() => console.log()}>
-                <Input
-                  type="text"
-                  name="task"
-                  placeholder="Enter task name"
-                  className="flex-grow mr-2"
-                  required
+        <Card className="col-span-full md:col-span-2 lg:col-span-3 mb-3 shadow-lg">
+          <CardHeader>
+            <CardTitle>Add New Task</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <form className="flex" onSubmit={() => console.log()}>
+              <Input
+                type="text"
+                name="task"
+                placeholder="Enter task name"
+                className="flex-grow mr-2"
+                required
+              />
+              <Button type="submit">
+                <Plus className="w-4 h-4 mr-2" />
+                Add Task
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {tasks.map((task) => (
+            <Card key={task.id} className="rounded-xl p-6 shadow-md">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-md font-medium">{task.name}</h2>
+                <span className="text-xs text-muted-foreground">
+                  {task.dueDate}
+                </span>
+              </div>
+
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <Button
+                    onClick={() => editTask(task.id)}
+                    className="text-muted-foreground"
+                    variant="secondary"
+                  >
+                    <Edit2 className="size-5" />
+                  </Button>
+                  <Button
+                    onClick={() => deleteTask(task.id)}
+                    className="text-muted-foreground"
+                    variant="secondary"
+                  >
+                    <Trash2 className="size-5" />
+                  </Button>
+                </div>
+
+                <Switch
+                  checked={task.completed}
+                  onCheckedChange={() => toggleComplete(task.id)}
                 />
-                <Button type="submit">
-                  <Plus className="w-4 h-4 mr-2" />
-                  Add Task
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 overflow-y-scroll __hideScrollBar">
-            {tasks.map((task) => (
-              <Card key={task.id} className="rounded-xl p-6 shadow-md">
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-md font-medium">{task.name}</h2>
-                  <span className="text-xs text-muted-foreground">
-                    {task.dueDate}
-                  </span>
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
-                    <Button
-                      onClick={() => editTask(task.id)}
-                      className="text-muted-foreground"
-                      variant="secondary"
-                    >
-                      <Edit2 className="size-5" />
-                    </Button>
-                    <Button
-                      onClick={() => deleteTask(task.id)}
-                      className="text-muted-foreground"
-                      variant="secondary"
-                    >
-                      <Trash2 className="size-5" />
-                    </Button>
-                  </div>
-
-                  <Switch
-                    checked={task.completed}
-                    onCheckedChange={() => toggleComplete(task.id)}
-                  />
-                </div>
-              </Card>
-            ))}
-          </div>
+              </div>
+            </Card>
+          ))}
         </div>
       </div>
     </div>
