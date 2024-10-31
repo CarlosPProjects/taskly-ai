@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { Plus, Edit2, Trash2 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
@@ -31,9 +31,11 @@ export default function Tasks() {
     },
   ]);
 
-  const addTask = () => {
-    // Placeholder for adding a new task
-    console.log("Add new task");
+  const addTask = async(e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    const formData = new FormData();
+    console.log(formData.get('task'));
   };
 
   const editTask = (id: number) => {
@@ -64,7 +66,7 @@ export default function Tasks() {
             <CardTitle>Add New Task</CardTitle>
           </CardHeader>
           <CardContent>
-            <form onSubmitCapture={addTask} className="flex" onSubmit={() => console.log()}>
+            <form className="flex" onSubmit={addTask}>
               <Input
                 type="text"
                 name="task"

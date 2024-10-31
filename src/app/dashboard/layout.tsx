@@ -1,6 +1,7 @@
 import Container from "@/components/Container";
 import Sidebar from "@/components/dashboard/Sidebar";
 import Header from "@/components/dashboard/layout/header";
+import { Toaster } from "@/components/ui/toaster";
 import React, { FC } from "react";
 
 interface Props {
@@ -17,6 +18,7 @@ const DashboardLayout: FC<Props> = ({ children }) => {
         </div>
         <div className="flex justify-center flex-1 max-h-full">{children}</div>
       </Container>
+      <Toaster/>
     </section>
   );
 };

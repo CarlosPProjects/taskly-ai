@@ -1,3 +1,4 @@
+import { toast } from "@/hooks/use-toast";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 export function cn(...inputs: ClassValue[]) {
@@ -17,4 +18,12 @@ export function getInitials(name: string | null | undefined) {
 
 export const isActivePathname = (path: string, pathname: string) => {
   return pathname.includes(path);
+};
+
+export const showErrorToast = (description: string) => {
+  toast({
+    title: "Error",
+    variant: "destructive",
+    description,
+  });
 };
