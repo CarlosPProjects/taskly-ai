@@ -45,7 +45,7 @@ export const getTasks = async () => {
       },
     });
 
-    revalidatePath("/");
+    // revalidatePath("/");
 
     return { success: true, tasks };
   } catch (error) {
@@ -95,6 +95,8 @@ export const updateTaskStatus = async (id: number, status: boolean) => {
         status,
       },
     });
+
+    revalidatePath("/");
 
     return { success: true };
   } catch (error) {

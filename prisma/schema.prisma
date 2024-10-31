@@ -14,6 +14,7 @@ datasource db {
   url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
   schemas   = ["auth", "public"]
+  
 }
 
 model tasks {
