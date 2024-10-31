@@ -1,53 +1,11 @@
-"use client";
-
-import { useState } from "react";
-import { Edit2, Trash2 } from "lucide-react";
-import { Switch } from "@/components/ui/switch";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import AddTaskForm from "@/components/dashboard/task/task-form";
+import { getTasks } from "@/app/actions/tasks";
+import TaskCard from "@/components/dashboard/task/task-card";
 
-interface Task {
-  id: number;
-  name: string;
-  dueDate: string;
-  completed: boolean;
-}
+export default async function Tasks() {
+  const { tasks } = await getTasks();
 
-export default function Tasks() {
-  const [tasks, setTasks] = useState<Task[]>([
-    { id: 1, name: "Design new logo", dueDate: "2023-06-15", completed: false },
-    {
-      id: 2,
-      name: "Update website content",
-      dueDate: "2023-06-20",
-      completed: true,
-    },
-    {
-      id: 3,
-      name: "Plan team meeting",
-      dueDate: "2023-06-18",
-      completed: false,
-    },
-  ]);
-
-  const editTask = (id: number) => {
-    // Placeholder for editing a task
-    console.log("Edit task", id);
-  };
-
-  const deleteTask = (id: number) => {
-    // Placeholder for deleting a task
-    console.log("Delete task", id);
-  };
-
-  const toggleComplete = (id: number) => {
-    setTasks(
-      tasks.map((task) =>
-        task.id === id ? { ...task, completed: !task.completed } : task
-      )
-    );
-  };
+  if (!tasks) return <div>Loading...</div>;
 
   return (
     <div className="flex bg-background w-full">
@@ -58,38 +16,7 @@ export default function Tasks() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {tasks.map((task) => (
-            <Card key={task.id} className="rounded-xl p-6 shadow-md">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-md font-medium">{task.name}</h2>
-                <span className="text-xs text-muted-foreground">
-                  {task.dueDate}
-                </span>
-              </div>
-
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-4">
-                  <Button
-                    onClick={() => editTask(task.id)}
-                    className="text-muted-foreground"
-                    variant="secondary"
-                  >
-                    <Edit2 className="size-5" />
-                  </Button>
-                  <Button
-                    onClick={() => deleteTask(task.id)}
-                    className="text-muted-foreground"
-                    variant="secondary"
-                  >
-                    <Trash2 className="size-5" />
-                  </Button>
-                </div>
-
-                <Switch
-                  checked={task.completed}
-                  onCheckedChange={() => toggleComplete(task.id)}
-                />
-              </div>
-            </Card>
+            <TaskCard key={task.id} task={task}/>
           ))}
         </div>
       </div>
