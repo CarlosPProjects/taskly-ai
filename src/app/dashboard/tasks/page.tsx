@@ -1,11 +1,11 @@
 "use client";
 
-import { FormEvent, useState } from "react";
-import { Plus, Edit2, Trash2 } from "lucide-react";
+import { useState } from "react";
+import { Edit2, Trash2 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+import { Card } from "@/components/ui/card";
+import AddTaskForm from "@/components/dashboard/task/task-form";
 
 interface Task {
   id: number;
@@ -31,13 +31,6 @@ export default function Tasks() {
     },
   ]);
 
-  const addTask = async(e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    
-    const formData = new FormData();
-    console.log(formData.get('task'));
-  };
-
   const editTask = (id: number) => {
     // Placeholder for editing a task
     console.log("Edit task", id);
@@ -61,26 +54,7 @@ export default function Tasks() {
       <div className="flex flex-col mx-auto w-full max-w-3xl">
         <h1 className="text-3xl font-semibold mb-6">Tasks</h1>
 
-        <Card className="col-span-full md:col-span-2 lg:col-span-3 mb-3 shadow-lg">
-          <CardHeader>
-            <CardTitle>Add New Task</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <form className="flex" onSubmit={addTask}>
-              <Input
-                type="text"
-                name="task"
-                placeholder="Enter task name"
-                className="flex-grow mr-2"
-                required
-              />
-              <Button type="submit">
-                <Plus className="w-4 h-4 mr-2" />
-                Add Task
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
+        <AddTaskForm />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {tasks.map((task) => (

@@ -36,7 +36,7 @@ const AddTaskForm = () => {
   };
 
   return (
-    <Card className="col-span-full md:col-span-2 lg:col-span-3">
+    <Card className="col-span-full md:col-span-2 lg:col-span-3 mb-3">
       <CardHeader>
         <CardTitle>Add New Task</CardTitle>
       </CardHeader>
